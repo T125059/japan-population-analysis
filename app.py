@@ -6,9 +6,7 @@ st.set_page_config(page_title="人口推移分析アプリ", layout="wide")
 
 # タイトルと出典
 st.title("都道府県別 人口推移データ分析")
-# ▼▼▼【ここを修正】正式な統計名に変更 ▼▼▼
 st.caption("出典: 政府統計の総合窓口(e-Stat)「人口推計 各年10月1日現在人口」(表番号005)より作成")
-# ▲▲▲ 修正ここまで ▲▲▲
 
 # データの読み込み
 try:
@@ -37,7 +35,7 @@ if not selected_prefs:
 filtered_df = df[df["都道府県"].isin(selected_prefs)]
 
 # --- 概況表示 ---
-st.markdown("### 📊 選択地域の人口概況")
+st.markdown("### 選択地域の人口概況")
 
 # 最新年と前年のデータを取得して比較
 latest_year = filtered_df["西暦"].max()
@@ -50,7 +48,6 @@ total_pop_latest = latest_data["人口"].sum()
 total_pop_prev = prev_data["人口"].sum()
 diff = total_pop_latest - total_pop_prev
 
-# メトリクス表示
 m_col1, m_col2, m_col3 = st.columns(3)
 with m_col1:
     st.metric(
