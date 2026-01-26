@@ -6,7 +6,9 @@ st.set_page_config(page_title="人口推移分析アプリ", layout="wide")
 
 # タイトルと出典
 st.title("都道府県別 人口推移データ分析")
-st.caption("出典: [政府統計の総合窓口(e-Stat)](https://www.e-stat.go.jp/dbview?sid=0003448232)より作成")
+# ▼▼▼【ここを修正】正式な統計名に変更 ▼▼▼
+st.caption("出典: 政府統計の総合窓口(e-Stat)「人口推計 各年10月1日現在人口」(表番号005)より作成")
+# ▲▲▲ 修正ここまで ▲▲▲
 
 # データの読み込み
 try:
@@ -48,7 +50,7 @@ total_pop_latest = latest_data["人口"].sum()
 total_pop_prev = prev_data["人口"].sum()
 diff = total_pop_latest - total_pop_prev
 
-# メトリクス表示（見やすさのための工夫）
+# メトリクス表示
 m_col1, m_col2, m_col3 = st.columns(3)
 with m_col1:
     st.metric(
@@ -74,6 +76,5 @@ with col2:
     st.write(f"※{latest_year}年時点")
 
 # --- データ詳細 ---
-# 画面をすっきりさせるために折りたたむ
 with st.expander("データ詳細を確認する"):
     st.dataframe(filtered_df)
