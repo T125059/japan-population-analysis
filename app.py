@@ -6,13 +6,17 @@ st.set_page_config(page_title="人口推移分析アプリ", layout="wide")
 
 # タイトル
 st.title("都道府県別 人口推移データ分析")
-# 【未使用UI 1】 st.caption
 st.caption("出典: 政府統計の総合窓口(e-Stat)より作成")
 
 # データの読み込み
 try:
-    # アップロードされたdata.csvを読み込む
+    # Excelできれいにしたので、そのまま読み込むだけでOKです
     df = pd.read_csv('data.csv')
+    
+    # 万が一、他の余計な列（Unnamedなど）が残っていた場合でも無視するように、
+    # 必要な3列だけを明示的に取り出しておくと安全です
+    df = df[["都道府県", "西暦", "人口"]]
+
 except Exception as e:
     st.error(f"データの読み込みエラー: {e}")
     st.stop()
@@ -42,7 +46,7 @@ st.divider()
 col1, col2 = st.columns(2)
 
 with col1:
-    st.subheader("人口推移 (折れ線グラフ)")
+    st.subheader("推移 (折れ線グラフ)")
     st.line_chart(filtered_df, x="西暦", y="人口", color="都道府県")
 
 with col2:
