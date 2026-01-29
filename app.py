@@ -74,4 +74,4 @@ with col2:
 
 # --- データ詳細 ---
 with st.expander("データ詳細を確認する"):
-    st.dataframe(filtered_df)
+    st.dataframe(filtered_df) 
